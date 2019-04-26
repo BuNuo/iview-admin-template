@@ -7,7 +7,6 @@ import store from './store'
 import iView from 'iview'
 import config from '@/config'
 import importDirective from '@/directive'
-import installPlugin from '@/plugin'
 import 'iview/dist/styles/iview.css'
 import './index.less'
 import '@/assets/icons/iconfont.css'
@@ -16,10 +15,6 @@ import '@/assets/icons/iconfont.css'
 if (process.env.NODE_ENV !== 'production') require('@/mock')
 
 Vue.use(iView)
-/**
- * @description 注册admin内置插件
- */
-installPlugin(Vue)
 /**
  * @description 生产环境关掉提示
  */
