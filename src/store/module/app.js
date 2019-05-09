@@ -10,9 +10,11 @@ import {
   getRouteTitleHandled
 } from '@/libs/util'
 import beforeClose from '@/router/before-close'
-import router from '@/router'
+import router from '@/router/index'
 import routers from '@/router/routers'
 import config from '@/config'
+console.log('dd' + routers)
+// import { dynamicRouterAdd } from '@/libs/router-util'
 const { homeName } = config
 
 const closePage = (state, route) => {
@@ -27,10 +29,12 @@ export default {
   state: {
     breadCrumbList: [],
     tagNavList: [],
-    homeRoute: getHomeRoute(routers, homeName)
+    homeRoute: getHomeRoute(routers, homeName),
+    menuList: []
   },
   getters: {
-    menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
+    // menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
+    menuList: (state, getters, rootState) => getMenuByRouter(state.menuList, rootState.user.access)
   },
   mutations: {
     setBreadCrumb (state, route) {
@@ -74,6 +78,14 @@ export default {
         }
         setTagNavListInLocalstorage([...state.tagNavList])
       }
+    },
+    updateMenuList (state, routes) {
+      for (let r in routes) {
+        router.options.routes.push(routes[r])
+      }
+
+      router.addRoutes(routes)
+      state.menuList = routes
     }
   },
   actions: {

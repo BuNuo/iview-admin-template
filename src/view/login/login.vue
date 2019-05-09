@@ -18,6 +18,7 @@
 <script>
 import LoginForm from '_c/login-form'
 import { mapActions } from 'vuex'
+import { initRouter } from '@/libs/router-util'
 export default {
   components: {
     LoginForm
@@ -30,6 +31,7 @@ export default {
     handleSubmit ({ userName, password }) {
       this.handleLogin({ userName, password }).then(res => {
         this.getUserInfo().then(res => {
+          initRouter()
           this.$router.push({
             name: this.$config.homeName
           })

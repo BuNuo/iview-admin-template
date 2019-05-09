@@ -121,7 +121,6 @@ export default {
       }
     },
     handleClose (current) {
-      console.log(current)
       if (current.meta && current.meta.beforeCloseName && current.meta.beforeCloseName in beforeClose) {
         new Promise(beforeClose[current.meta.beforeCloseName]).then(close => {
           if (close) {
